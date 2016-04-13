@@ -1,6 +1,11 @@
 # Angular2-demo" >> README.md
 This was forked from angular.io with the original README as the following.
 
+# BreweryDb api & CORS error
+In the beer.service.ts I am using a localhost before the api URL. I am doing that to get around a cors error. If you would like to do the same do the following.
+
+npm install -g corsproxy
+corsproxy
 # Angular 2 QuickStart Source
 
 This repository holds the TypeScript source code of the [angular.io quickstart](https://angular.io/docs/ts/latest/quickstart.html),
