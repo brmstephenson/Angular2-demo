@@ -28,8 +28,9 @@ System.register(['angular2/core', 'angular2/http', './beer', 'rxjs/Rx'], functio
             BeerService = (function () {
                 function BeerService(http) {
                     this.http = http;
-                    this._beerUrl = "http://localhost:1337/api.brewerydb.com/v2/beers?availableId=1&withBreweries=Y&key=2d18b2531035b441a50dddc3aed32a1b";
-                    this._searchUrl = "http://api.brewerydb.com/v2/search?q=Goosinator&type=beer&withBreweries=Y&key=2d18b2531035b441a50dddc3aed32a1b";
+                    this._breweryDbKey = '2d18b2531035b441a50dddc3aed32a1b';
+                    this._beerUrl = "http://localhost:1337/api.brewerydb.com/v2/beers?availableId=1&withBreweries=Y&key=" + this._breweryDbKey;
+                    this._searchUrl = "http://localhost:1337/api.brewerydb.com/v2/search?type=beer&withBreweries=Y&key=" + this._breweryDbKey + '&q=';
                 }
                 BeerService.prototype.getBeer = function () {
                     return this.http.get(this._beerUrl)
@@ -45,6 +46,22 @@ System.register(['angular2/core', 'angular2/http', './beer', 'rxjs/Rx'], functio
                             });
                         });
                     });
+                };
+                BeerService.prototype.search = function (term) {
+                    return this.http.get(this._searchUrl + term)
+                        .map(function (response) {
+                        return response.json().data.map(function (item) {
+                            return new beer_1.Beer({
+                                name: item.nameDisplay,
+                                brewery: item.breweries[0].nameShortDisplay,
+                                description: item.description,
+                                abv: item.abv,
+                                ibu: item.ibu,
+                                type: item.style.shortName
+                            });
+                        });
+                    });
+                    // .map((response: Response) => { console.log(response.json()); return response.json().data })
                 };
                 BeerService.prototype.handleError = function (error) {
                     console.log(error);

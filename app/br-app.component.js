@@ -46,8 +46,8 @@ System.register(["angular2/core", "./beer.service", "./search.pipe", './br-detai
                         providers: [beer_service_1.BeerService],
                         directives: [br_detail_component_1.BeerDetailComponent],
                         pipes: [search_pipe_1.SearchPipe],
-                        styles: ["\n      .beer {\n        list-style: none;\n        padding: 0;\n      }\n      .beer-item{\n        background-color: #CFCFCF;\n        margin: 10px 0;\n        width: 250px;\n        cursor: pointer;\n        padding: 5px;\n      }\n      .name {\n        color: brown;\n      }\n      .selected {\n        background-color: #FBB117;\n      }\n    "],
-                        template: "\n      <h1>Beer life is the life for me</h1>\n      <input type=\"text\" [(ngModel)]=\"query\"/>\n      <ul class=\"beer\" *ngIf=\"beer\">\n        <li *ngFor=\"#b of beer | search: query\"\n            class=\"beer-item\" \n            (click)=\"selectBeer(b)\" \n            [class.selected]=\"b === selectedBeer\">\n            <br-detail [beer]=\"b\"></br-detail>\n        </li>\n      </ul>\n    "
+                        styles: ["\n      .home {\n        padding: 10px;\n      }\n      .beer {\n        list-style: none;\n        padding: 0;\n      }\n      .beer-item{\n        background-color: #CFCFCF;\n        margin: 10px 0;\n        width: 250px;\n        cursor: pointer;\n        padding: 5px;\n      }\n      .selected {\n        background-color: #FBB117;\n      }\n    "],
+                        template: "\n      <div class=\"home\">\n        <h1>Beer life is the life for me</h1>\n        <input type=\"text\" [(ngModel)]=\"query\"/>\n        <ul class=\"beer\" *ngIf=\"beer\">\n          <li *ngFor=\"#b of beer | search: query\"\n              class=\"beer-item\" \n              (click)=\"selectBeer(b)\" \n              [class.selected]=\"b === selectedBeer\">\n              <br-detail [beer]=\"b\"></br-detail>\n          </li>\n        </ul>\n      </div>\n    "
                     }), 
                     __metadata('design:paramtypes', [beer_service_1.BeerService])
                 ], BeerAppComponent);

@@ -25,7 +25,8 @@ System.register(['angular2/core'], function(exports_1, context_1) {
                     core_1.Component({
                         selector: 'br-detail',
                         inputs: ['beer'],
-                        template: "\n    <div class=\"name\">Name: {{beer.name}}</div>\n    <div class=\"brewery\">Brewery: {{beer.brewery}}</div>\n    <div class=\"type\">Type: {{beer.type}}</div>\n    <div class=\"abv\">Abv: {{beer.abv}}%</div>\n    <div class=\"ibu\">Ibu: {{beer.ibu}}</div>\n    <!--<div class=\"description\">Description: {{beer.description}}</div>-->",
+                        template: "\n    <div class=\"beer-item\">\n      <div class=\"name\">Name: {{beer.name}}</div>\n      <div class=\"brewery\">Brewery: {{beer.brewery}}</div>\n      <div class=\"type\">Type: {{beer.type}}</div>\n      <div class=\"abv\">Abv: {{beer.abv}}%</div>\n      <div class=\"ibu\">Ibu: {{beer.ibu}}</div>\n      <!--<div class=\"description\">Description: {{beer.description}}</div>-->\n    </div>",
+                        styles: ["\n      .name {\n        color: brown;\n      }\n      .beer-item {\n        color: green;\n      }\n    "]
                     }), 
                     __metadata('design:paramtypes', [])
                 ], BeerDetailComponent);
