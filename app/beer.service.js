@@ -28,13 +28,13 @@ System.register(['angular2/core', 'angular2/http', './beer', 'rxjs/Rx'], functio
             BeerService = (function () {
                 function BeerService(http) {
                     this.http = http;
-                    this._beerUrl = "https://crossorigin.me/http://api.brewerydb.com/v2/beers?availableId=1&withBreweries=Y&key=2d18b2531035b441a50dddc3aed32a1b";
+                    this._beerUrl = "http://localhost:1337/api.brewerydb.com/v2/beers?availableId=1&withBreweries=Y&key=2d18b2531035b441a50dddc3aed32a1b";
+                    this._searchUrl = "http://api.brewerydb.com/v2/search?q=Goosinator&type=beer&withBreweries=Y&key=2d18b2531035b441a50dddc3aed32a1b";
                 }
                 BeerService.prototype.getBeer = function () {
                     return this.http.get(this._beerUrl)
                         .map(function (response) {
                         return response.json().data.map(function (item) {
-                            // console.log("raw item", item); // uncomment if you want to debug
                             return new beer_1.Beer({
                                 name: item.nameDisplay,
                                 brewery: item.breweries[0].nameShortDisplay,
