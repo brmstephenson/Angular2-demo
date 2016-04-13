@@ -1,4 +1,4 @@
-System.register(["angular2/core", "./beer.service", "./search.pipe"], function(exports_1, context_1) {
+System.register(["angular2/core", "./beer.service", "./search.pipe", './br-detail.component'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(["angular2/core", "./beer.service", "./search.pipe"], function(e
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, beer_service_1, search_pipe_1;
+    var core_1, beer_service_1, search_pipe_1, br_detail_component_1;
     var BeerAppComponent;
     return {
         setters:[
@@ -22,6 +22,9 @@ System.register(["angular2/core", "./beer.service", "./search.pipe"], function(e
             },
             function (search_pipe_1_1) {
                 search_pipe_1 = search_pipe_1_1;
+            },
+            function (br_detail_component_1_1) {
+                br_detail_component_1 = br_detail_component_1_1;
             }],
         execute: function() {
             BeerAppComponent = (function () {
@@ -41,9 +44,10 @@ System.register(["angular2/core", "./beer.service", "./search.pipe"], function(e
                     core_1.Component({
                         selector: "br-app",
                         providers: [beer_service_1.BeerService],
+                        directives: [br_detail_component_1.BeerDetailComponent],
                         pipes: [search_pipe_1.SearchPipe],
-                        styles: ["\n      .beer {\n        list-style: none;\n        padding: 0;\n      }\n      .beer-item{\n        background-color: #CFCFCF;\n        margin: 10px 0;\n        width: 250px;\n        cursor: pointer;\n        padding: 5px;\n      }\n      .name {\n        color: brown;\n      }\n      .selected {\n        background-color: #FBB117;\n      }\n    "],
-                        template: "\n      <h1>Beer life is the life for me</h1>\n      <input type=\"text\" [(ngModel)]=\"query\"/>\n      <ul class=\"beer\" *ngIf=\"beer\">\n        <li *ngFor=\"#b of beer | search: query\"\n            class=\"beer-item\" \n            (click)=\"selectBeer(b)\" \n            [class.selected]=\"b === selectedBeer\">\n          <div class=\"name\">Name: {{b.name}}</div>\n          <div class=\"brewery\">Brewery: {{b.brewery}}</div>\n          <div class=\"type\">Type: {{b.type}}</div>\n          <div class=\"abv\">Abv: {{b.abv}}%</div>\n          <div class=\"ibu\">Ibu: {{b.ibu}}</div>\n          <!--<div class=\"description\">Description: {{b.description}}</div>-->\n        </li>\n      </ul>\n    "
+                        styles: ["\n      .home {\n        padding: 10px;\n      }\n      .beer {\n        list-style: none;\n        padding: 0;\n      }\n      .beer-item{\n        background-color: #CFCFCF;\n        margin: 10px 0;\n        width: 250px;\n        cursor: pointer;\n        padding: 5px;\n      }\n      .selected {\n        background-color: #FBB117;\n      }\n    "],
+                        template: "\n      <div class=\"home\">\n        <h1>Beer life is the life for me</h1>\n        <input type=\"text\" [(ngModel)]=\"query\"/>\n        <ul class=\"beer\" *ngIf=\"beer\">\n          <li *ngFor=\"#b of beer | search: query\"\n              class=\"beer-item\" \n              (click)=\"selectBeer(b)\" \n              [class.selected]=\"b === selectedBeer\">\n              <br-detail [beer]=\"b\"></br-detail>\n          </li>\n        </ul>\n      </div>\n    "
                     }), 
                     __metadata('design:paramtypes', [beer_service_1.BeerService])
                 ], BeerAppComponent);

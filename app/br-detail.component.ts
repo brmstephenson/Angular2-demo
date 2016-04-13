@@ -17,6 +17,9 @@ import { Beer } from './beer';
       .name {
         color: brown;
       }
+      .beer-item {
+        color: green;
+      }
     `]
 })
 export class BeerDetailComponent {

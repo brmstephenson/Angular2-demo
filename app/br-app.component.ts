@@ -2,12 +2,17 @@ import {Component, OnInit} from "angular2/core";
 import { BeerService } from "./beer.service";
 import { SearchPipe } from "./search.pipe";
 import { Beer } from './beer';
+import { BeerDetailComponent } from './br-detail.component';
 
 @Component({
     selector: "br-app",
     providers: [BeerService],
+    directives: [BeerDetailComponent],
     pipes: [SearchPipe],
     styles: [`
+      .home {
+        padding: 10px;
+      }
       .beer {
         list-style: none;
         padding: 0;
@@ -19,31 +24,26 @@ import { Beer } from './beer';
         cursor: pointer;
         padding: 5px;
       }
-      .name {
-        color: brown;
-      }
       .selected {
         background-color: #FBB117;
       }
     `],
     template: `
-      <h1>Beer life is the life for me</h1>
-      <input type="text" [(ngModel)]="query"/>
-      <ul class="beer" *ngIf="beer">
-        <li *ngFor="#b of beer | search: query"
-            class="beer-item" 
-            (click)="selectBeer(b)" 
-            [class.selected]="b === selectedBeer">
-          <div class="name">Name: {{b.name}}</div>
-          <div class="brewery">Brewery: {{b.brewery}}</div>
-          <div class="type">Type: {{b.type}}</div>
-          <div class="abv">Abv: {{b.abv}}%</div>
-          <div class="ibu">Ibu: {{b.ibu}}</div>
-          <!--<div class="description">Description: {{b.description}}</div>-->
-        </li>
-      </ul>
+      <div class="home">
+        <h1>Beer life is the life for me</h1>
+        <input type="text" [(ngModel)]="query"/>
+        <ul class="beer" *ngIf="beer">
+          <li *ngFor="#b of beer | search: query"
+              class="beer-item" 
+              (click)="selectBeer(b)" 
+              [class.selected]="b === selectedBeer">
+              <br-detail [beer]="b"></br-detail>
+          </li>
+        </ul>
+      </div>
     `
 })
+
 export class BeerAppComponent implements OnInit {
   beer: Beer[];
   errorMessage: any;

@@ -5,13 +5,15 @@ import 'rxjs/Rx';
 
 @Injectable()
 export class BeerService {
-  private _beerUrl = "https://crossorigin.me/http://api.brewerydb.com/v2/beers?availableId=1&withBreweries=Y&key=2d18b2531035b441a50dddc3aed32a1b";
+  private _breweryDbKey = '2d18b2531035b441a50dddc3aed32a1b';
+  private _beerUrl = "http://localhost:1337/api.brewerydb.com/v2/beers?availableId=1&withBreweries=Y&key=" + this._breweryDbKey;
+  private _searchUrl = "http://localhost:1337/api.brewerydb.com/v2/search?type=beer&withBreweries=Y&key=" + this._breweryDbKey + '&q=';
+
   constructor(private http: Http) {}
   getBeer() {
     return this.http.get(this._beerUrl)
       .map((response: Response) => {
-        return (<any>response.json()).data.map(item => {
-          // console.log("raw item", item); // uncomment if you want to debug
+        return response.json().data.map(item => {
           return new Beer({
             name: item.nameDisplay,
             brewery: item.breweries[0].nameShortDisplay,
@@ -22,6 +24,22 @@ export class BeerService {
           });
         });
       });
+  }
+  search(term: string) {
+    return this.http.get(this._searchUrl + term)
+      .map((response: Response) => { 
+        return response.json().data.map(item => {
+          return new Beer({
+            name: item.nameDisplay,
+            brewery: item.breweries[0].nameShortDisplay,
+            description: item.description,
+            abv: item.abv,
+            ibu: item.ibu,
+            type: item.style.shortName
+          });
+        }) 
+      })
+      // .map((response: Response) => { console.log(response.json()); return response.json().data })
   }
   private handleError (error: Response) {
     console.log(error);
