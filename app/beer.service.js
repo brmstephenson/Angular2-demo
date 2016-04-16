@@ -45,7 +45,8 @@ System.register(['angular2/core', 'angular2/http', './beer', 'rxjs/Rx'], functio
                                 type: item.style.shortName
                             });
                         });
-                    });
+                    })
+                        .catch(function (err) { return console.log(err); });
                 };
                 BeerService.prototype.search = function (term) {
                     return this.http.get(this._searchUrl + term)
@@ -60,11 +61,8 @@ System.register(['angular2/core', 'angular2/http', './beer', 'rxjs/Rx'], functio
                                 type: item.style.shortName
                             });
                         });
-                    });
-                    // .map((response: Response) => { console.log(response.json()); return response.json().data })
-                };
-                BeerService.prototype.handleError = function (error) {
-                    console.log(error);
+                    })
+                        .catch(function (err) { return console.log(err); });
                 };
                 BeerService = __decorate([
                     core_1.Injectable(), 

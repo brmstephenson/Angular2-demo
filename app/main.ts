@@ -2,6 +2,7 @@ import { provide, Component } from 'angular2/core';
 import { bootstrap } from 'angular2/platform/browser';
 import { BeerAppComponent } from './br-app.component';
 import { BeerSearchComponent } from './br-search.component';
+import { PirateTalkComponent } from './pirate-term.component';
 import { HTTP_PROVIDERS, JSONP_PROVIDERS } from 'angular2/http';
 import { 
     ROUTER_DIRECTIVES,
@@ -20,6 +21,7 @@ import {
         <li class="logo"><a [routerLink]="['/Home']"><img src="https://angular.io/resources/images/logos/standard/logo-nav.png" /></a></li>
         <li class="link"><a [routerLink]="['/Home']">Home</a></li>
         <li class="link"><a [routerLink]="['/Search']">Search</a></li>
+        <li class="link"><a [routerLink]="['/Pirate']">Pirate Talk</a></li>
       </ul>
       <router-outlet></router-outlet>
     </div>
@@ -49,7 +51,8 @@ import {
 @RouteConfig([
   {path: '/', name: 'root', redirectTo: ['/Home'] },
   {path: '/home', name: 'Home', component: BeerAppComponent },
-  {path: '/search', name: 'Search', component: BeerSearchComponent}
+  {path: '/search', name: 'Search', component: BeerSearchComponent},
+  { path: '/pirate', name: 'Pirate', component: PirateTalkComponent}
 ])
 class BeerApplication {
 }

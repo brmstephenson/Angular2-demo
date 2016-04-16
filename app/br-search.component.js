@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/common', './beer.service'], function(exports_1, context_1) {
+System.register(['angular2/core', 'angular2/common', './beer.service', './br-detail.component'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', 'angular2/common', './beer.service'], function
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, common_1, beer_service_1;
+    var core_1, common_1, beer_service_1, br_detail_component_1;
     var BeerSearchComponent;
     return {
         setters:[
@@ -22,6 +22,9 @@ System.register(['angular2/core', 'angular2/common', './beer.service'], function
             },
             function (beer_service_1_1) {
                 beer_service_1 = beer_service_1_1;
+            },
+            function (br_detail_component_1_1) {
+                br_detail_component_1 = br_detail_component_1_1;
             }],
         execute: function() {
             BeerSearchComponent = (function () {
@@ -33,17 +36,14 @@ System.register(['angular2/core', 'angular2/common', './beer.service'], function
                         .debounceTime(400)
                         .distinctUntilChanged()
                         .switchMap(function (term) { return _this.beerService.search(term); });
-                    console.log(this.results);
                 }
-                BeerSearchComponent.prototype.clickMe = function () {
-                    console.log(this.results);
-                };
                 BeerSearchComponent = __decorate([
                     core_1.Component({
                         selector: 'br-search',
                         providers: [beer_service_1.BeerService],
-                        template: "\n      <div class=\"search\">\n        <h1>Search for Beer</h1>\n        <input type=\"text\" [ngFormControl]=\"term\"/>\n        <div *ngFor=\"#r of results | async\" (click)=\"clickMe()\">{{r.name}}</div>\n      </div>\n    ",
-                        styles: ["\n      .search {\n        padding: 10px;\n      }\n    "]
+                        directives: [br_detail_component_1.BeerDetailComponent],
+                        template: "\n      <div class=\"search\">\n        <h1>Search for Beer</h1>\n        <input type=\"text\" [ngFormControl]=\"term\"/>\n        <div *ngFor=\"#r of results | async\" class=\"beer-item\">\n          <br-detail [beer]=\"r\"></br-detail>\n        </div>\n      </div>\n    ",
+                        styles: ["\n      input {\n        height: 30px;\n        font-size: 1.2em;\n      }\n      .search {\n        padding: 10px;\n      }\n      .beer-item {\n        margin: 10px;\n        border: 1px green solid;\n        width: 500px;\n      }\n    "]
                     }), 
                     __metadata('design:paramtypes', [beer_service_1.BeerService])
                 ], BeerSearchComponent);

@@ -23,11 +23,12 @@ export class BeerService {
             type: item.style.shortName
           });
         });
-      });
+      })
+      .catch((err: Response) => console.log(err));
   }
   search(term: string) {
     return this.http.get(this._searchUrl + term)
-      .map((response: Response) => { 
+      .map((response: Response) => {
         return response.json().data.map(item => {
           return new Beer({
             name: item.nameDisplay,
@@ -37,11 +38,8 @@ export class BeerService {
             ibu: item.ibu,
             type: item.style.shortName
           });
-        }) 
+        })
       })
-      // .map((response: Response) => { console.log(response.json()); return response.json().data })
-  }
-  private handleError (error: Response) {
-    console.log(error);
+      .catch((err: Response) => console.log(err));
   }
 }
